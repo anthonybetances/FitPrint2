@@ -1,0 +1,142 @@
+<h1>FitPrint</h1>
+<h2 class="mt-4">Dashboard</h2>
+<p class="lead mb-3">Welcome <span class="name"><%= user.name %></span></p>
+<a href="/users/logout" class="btn btn-secondary">Log Out</a>
+<br>
+
+
+<form class="goals">
+  <span class="d-inline-block mt-5 mb-3">Current Weight</span>
+  <input type="text" class="currentWeight"><br>
+  <span>Goal Weight </span>
+  <input type="text" class="goalWeight ml-4">
+  <button type="submit" class="submit btn btn-primary d-block mt-4">Submit</button>
+</form>
+
+
+<% for (let i = 0; i < profile.length; i++) { %>
+  <% if (profile[i].name == user.name) { %>
+    <p class="mt-5"> Current Weight: <%= profile[i].currentWeight %> lbs </p>
+    <p> Goal Weight: <%= profile[i].goalWeight %> lbs </p>
+    <p> Daily Calorie Goal: <%= profile[i].calorieGoal %> kcals </p>
+    <p> Daily Protein Goal: <%= profile[i].proteinGoal %> g </p>
+    <p> Daily Carb Goal: <%= profile[i].carbGoal %> g </p>
+    <p> Daily Fat Goal: <%= profile[i].fatGoal %> g </p>
+  <% } %>
+<% } %>
+
+<h2>Meals</h2>
+<form class="meals">
+  <h3>Meal 1</h3>
+  <input type="text" class="d-inline-block mb-3 food" placeholder="food">
+  <input type="text" class="calories ml-4" placeholder="calories">
+  <input type="text" class="protein ml-4" placeholder="protein">
+  <input type="text" class="carbs ml-4" placeholder="carbs">
+  <input type="text" class="fat ml-4" placeholder="fats">
+  <button type="submit" class="submit btn btn-primary d-block mt-4">Submit</button>
+
+  <h3>Meal 2</h3>
+  <input type="text" class="d-inline-block mb-3 food" placeholder="food">
+  <input type="text" class="calories ml-4" placeholder="calories">
+  <input type="text" class="protein ml-4" placeholder="protein">
+  <input type="text" class="carbs ml-4" placeholder="carbs">
+  <input type="text" class="fat ml-4" placeholder="fats">
+  <button type="submit" class="submit btn btn-primary d-block mt-4">Submit</button>
+
+  <h3>Meal 3</h3>
+  <input type="text" class="d-inline-block mb-3 food" placeholder="food">
+  <input type="text" class="calories ml-4" placeholder="calories">
+  <input type="text" class="protein ml-4" placeholder="protein">
+  <input type="text" class="carbs ml-4" placeholder="carbs">
+  <input type="text" class="fat ml-4" placeholder="fats">
+  <button type="submit" class="submit btn btn-primary d-block mt-4">Submit</button>
+
+  <h3>Meal 4</h3>
+  <input type="text" class="d-inline-block mb-3 food" placeholder="food">
+  <input type="text" class="calories ml-4" placeholder="calories">
+  <input type="text" class="protein ml-4" placeholder="protein">
+  <input type="text" class="carbs ml-4" placeholder="carbs">
+  <input type="text" class="fat ml-4" placeholder="fats">
+  <button type="submit" class="submit btn btn-primary d-block mt-4">Submit</button>
+
+  <h3>Meal 5</h3>
+  <input type="text" class="d-inline-block mb-3 food" placeholder="food">
+  <input type="text" class="calories ml-4" placeholder="calories">
+  <input type="text" class="protein ml-4" placeholder="protein">
+  <input type="text" class="carbs ml-4" placeholder="carbs">
+  <input type="text" class="fat ml-4" placeholder="fats">
+  <button type="submit" class="submit btn btn-primary d-block mt-4">Submit</button>
+</form>
+
+
+
+
+
+<a href="/users/logout"><button type="button" class="delete btn btn-primary d-block mt-4">Delete Profile</button></a>
+
+
+<script type="text/javascript">
+const submit = document.querySelector('.submit');
+const del = document.querySelector('.delete');
+const name = document.querySelector('.name').innerHTML;
+
+submit.addEventListener('click', () => {
+  const currentWeight = document.querySelector('.currentWeight').value;
+  const goalWeight = document.querySelector('.goalWeight').value;
+  let calorieGoal = (currentWeight * 14) - ((currentWeight * 14) * .2)
+  let proteinGoal = currentWeight
+  let fatGoal = (calorieGoal * .25) / 9
+  let carbGoal = (calorieGoal - ((proteinGoal * 4) + (fatGoal * 9))) / 4
+
+  fetch('goals', {
+    method: 'put',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      'currentWeight': parseInt(currentWeight),
+      'goalWeight': parseInt(goalWeight),
+      'calorieGoal': parseInt(calorieGoal),
+      'proteinGoal': parseInt(proteinGoal),
+      'carbGoal': parseInt(carbGoal),
+      'fatGoal': parseInt(fatGoal),
+    })
+  })
+  .then(res => {
+    if (res.ok) return res.json()
+  }).
+  then(data => {
+    console.log(data)
+  })
+})
+
+
+
+
+
+
+
+
+
+del.addEventListener('click', () => {
+  console.log(name);
+  fetch('delete', {
+    method: 'delete',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      'user': name
+    })
+  })
+  .then(res => {
+    if (res.ok) return res.json()
+  }).
+  then(data => {
+    console.log(data)
+  })
+})
+
+
+
+</script>
