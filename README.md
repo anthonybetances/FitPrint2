@@ -1,4 +1,5 @@
-##FitPrint
+## FitPrint
+
 This app is a work in progress.  So far, users are allowed to register, and add their current and goal weights.  The app recommends daily calorie and macronutrient goals based on these variables, and they can be updated as the user updates their weight.  The user can also delete their profile.  The next step will be giving functionality to the meal inputs and submission buttons, so that users are able to add foods (and their respective caloric and macro info) to each meal, see them in a list, and see the toal of these values both for each meal and for the entire day.
 
 ## Background
