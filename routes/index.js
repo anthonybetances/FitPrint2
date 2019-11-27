@@ -7,13 +7,8 @@ router.get('/', forwardAuthenticated, (req, res) => res.render('welcome'));
 
 // Dashboard
 router.get('/dashboard', ensureAuthenticated, (req, res) => {
-  const db = mongoose.connection;
-  db.collection('users').find().toArray((err, result) => {
-    res.render('dashboard', {
-      user: req.user,
-      profile: result
-    })
-    console.log(result);
+  res.render('dashboard', {
+    user: req.user
   })
 });
 
@@ -37,6 +32,30 @@ router.put('/goals', (req, res) => {
     res.send(result)
   })
 })
+
+
+router.put('/mealsRoute', (req, res) => {
+  const db = mongoose.connection;
+  const mealObject = {
+    foodName: req.body.foodName,
+    calories: req.body.calories,
+    protein: req.body.protein,
+    carbs: req.body.carbs,
+    fats: req.body.fats
+  }
+  db.collection('users').findOneAndUpdate({name: req.user.name}, {
+    $push: {
+      meals: mealObject
+    }
+  }, {
+    sort: {_id: -1},
+  }, (err, result) => {
+    if (err) return res.send(err)
+    res.send(result)
+  })
+})
+
+
 
 router.delete('/delete', (req, res) => {
   const db = mongoose.connection;

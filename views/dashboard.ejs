@@ -14,58 +14,34 @@
 </form>
 
 
-<% for (let i = 0; i < profile.length; i++) { %>
-  <% if (profile[i].name == user.name) { %>
-    <p class="mt-5"> Current Weight: <%= profile[i].currentWeight %> lbs </p>
-    <p> Goal Weight: <%= profile[i].goalWeight %> lbs </p>
-    <p> Daily Calorie Goal: <%= profile[i].calorieGoal %> kcals </p>
-    <p> Daily Protein Goal: <%= profile[i].proteinGoal %> g </p>
-    <p> Daily Carb Goal: <%= profile[i].carbGoal %> g </p>
-    <p> Daily Fat Goal: <%= profile[i].fatGoal %> g </p>
-  <% } %>
-<% } %>
+  <p class="mt-5"> Current Weight: <%= user.currentWeight %> lbs </p>
+  <p> Goal Weight: <%= user.goalWeight %> lbs </p>
+  <p> Daily Calorie Goal: <%= user.calorieGoal %> kcals </p>
+  <p> Daily Protein Goal: <%= user.proteinGoal %> g </p>
+  <p> Daily Carb Goal: <%= user.carbGoal %> g </p>
+  <p> Daily Fat Goal: <%= user.fatGoal %> g </p>
+
 
 <h2>Meals</h2>
+
+<% for(let i = 0; i < user.meals.length ; i++) { %>
+  <span> Food: <%= user.meals[i].foodName %> </span>
+  <span> Calories: <%= user.meals[i].calories %> </span>
+  <span> Food: <%= user.meals[i].foodName %> </span>
+  <span> Calories: <%= user.meals[i].calories %> </span>
+  <br>
+<% } %>
+
 <form class="meals">
-  <h3>Meal 1</h3>
-  <input type="text" class="d-inline-block mb-3 food" placeholder="food">
-  <input type="text" class="calories ml-4" placeholder="calories">
-  <input type="text" class="protein ml-4" placeholder="protein">
-  <input type="text" class="carbs ml-4" placeholder="carbs">
-  <input type="text" class="fat ml-4" placeholder="fats">
-  <button type="submit" class="submit btn btn-primary d-block mt-4">Submit</button>
 
-  <h3>Meal 2</h3>
-  <input type="text" class="d-inline-block mb-3 food" placeholder="food">
+  <h3>New Meal</h3>
+  <input type="text" class="d-inline-block mb-3 foodName" placeholder="food name">
   <input type="text" class="calories ml-4" placeholder="calories">
   <input type="text" class="protein ml-4" placeholder="protein">
   <input type="text" class="carbs ml-4" placeholder="carbs">
-  <input type="text" class="fat ml-4" placeholder="fats">
-  <button type="submit" class="submit btn btn-primary d-block mt-4">Submit</button>
+  <input type="text" class="fats ml-4" placeholder="fats">
+  <button type="submit" class="meal btn btn-primary d-block mt-4">Submit</button>
 
-  <h3>Meal 3</h3>
-  <input type="text" class="d-inline-block mb-3 food" placeholder="food">
-  <input type="text" class="calories ml-4" placeholder="calories">
-  <input type="text" class="protein ml-4" placeholder="protein">
-  <input type="text" class="carbs ml-4" placeholder="carbs">
-  <input type="text" class="fat ml-4" placeholder="fats">
-  <button type="submit" class="submit btn btn-primary d-block mt-4">Submit</button>
-
-  <h3>Meal 4</h3>
-  <input type="text" class="d-inline-block mb-3 food" placeholder="food">
-  <input type="text" class="calories ml-4" placeholder="calories">
-  <input type="text" class="protein ml-4" placeholder="protein">
-  <input type="text" class="carbs ml-4" placeholder="carbs">
-  <input type="text" class="fat ml-4" placeholder="fats">
-  <button type="submit" class="submit btn btn-primary d-block mt-4">Submit</button>
-
-  <h3>Meal 5</h3>
-  <input type="text" class="d-inline-block mb-3 food" placeholder="food">
-  <input type="text" class="calories ml-4" placeholder="calories">
-  <input type="text" class="protein ml-4" placeholder="protein">
-  <input type="text" class="carbs ml-4" placeholder="carbs">
-  <input type="text" class="fat ml-4" placeholder="fats">
-  <button type="submit" class="submit btn btn-primary d-block mt-4">Submit</button>
 </form>
 
 
@@ -79,6 +55,7 @@
 const submit = document.querySelector('.submit');
 const del = document.querySelector('.delete');
 const name = document.querySelector('.name').innerHTML;
+const meal = document.querySelector('.meal')
 
 submit.addEventListener('click', () => {
   const currentWeight = document.querySelector('.currentWeight').value;
@@ -110,10 +87,33 @@ submit.addEventListener('click', () => {
   })
 })
 
+meal.addEventListener('click', () => {
+  const foodName = document.querySelector('.foodName').value;
+  const calories = document.querySelector('.calories').value;
+  const protein = document.querySelector('.protein').value;
+  const carbs = document.querySelector('.carbs').value;
+  const fats = document.querySelector('.fats').value;
 
-
-
-
+  fetch('mealsRoute', {
+    method: 'put',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      'foodName': foodName,
+      'calories': parseInt(calories),
+      'protein': parseInt(protein),
+      'carbs': parseInt(carbs),
+      'fats': parseInt(fats)
+    })
+  })
+  .then(res => {
+    if (res.ok) return res.json()
+  }).
+  then(data => {
+    console.log(data)
+  })
+})
 
 
 
@@ -136,7 +136,5 @@ del.addEventListener('click', () => {
     console.log(data)
   })
 })
-
-
 
 </script>

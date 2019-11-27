@@ -38,6 +38,10 @@ const UserSchema = new Schema({
     type: Number,
     default: 0
   },
+  meals: {
+    type: Array,
+    default: []
+  },
 });
 
 const User = mongoose.model('User', UserSchema, 'users');

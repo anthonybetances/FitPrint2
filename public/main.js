@@ -1,5 +1,6 @@
 let button = document.querySelectorAll('.button');
 let item = document.querySelectorAll('.item');
+let mealOne = document.querySelectorAll('.mealOne')
 console.log(button);
 
 for (let i = 0; i < button.length; i++) {
@@ -21,4 +22,8 @@ for (let i = 0; i < button.length; i++) {
         window.location.reload()
       })
   })
+}
+
+for (let i = 0; i < button.length; i++){
+
 }
