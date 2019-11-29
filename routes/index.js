@@ -43,16 +43,24 @@ router.put('/mealsRoute', (req, res) => {
     carbs: req.body.carbs,
     fats: req.body.fats
   }
+
   db.collection('users').findOneAndUpdate({name: req.user.name}, {
     $push: {
-      meals: mealObject
+      meals: mealObject,
+      totalCalories: req.body.calories,
+      totalProtein: req.body.protein,
+      totalCarbs: req.body.carbs,
+      totalFats: req.body.fats
     }
+
   }, {
     sort: {_id: -1},
   }, (err, result) => {
     if (err) return res.send(err)
     res.send(result)
+    console.log(result)
   })
+
 })
 
 

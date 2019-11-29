@@ -42,6 +42,22 @@ const UserSchema = new Schema({
     type: Array,
     default: []
   },
+  totalCalories: {
+    type: Array,
+    default: []
+  },
+  totalProtein: {
+    type: Array,
+    default: []
+  },
+  totalCarbs: {
+    type: Array,
+    default: []
+  },
+  totalFats: {
+    type: Array,
+    default: []
+  }
 });
 
 const User = mongoose.model('User', UserSchema, 'users');
