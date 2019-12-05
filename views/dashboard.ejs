@@ -1,3 +1,14 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>FitPrint</title>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+  </head>
+
+<body>
+
+
 <h1>FitPrint</h1>
 <h2 class="mt-4">Dashboard</h2>
 <p class="lead mb-3">Welcome <span class="name"><%= user.name %></span></p>
@@ -47,29 +58,32 @@ console.log(dates)
 
 <span>Total Calories: <%=sumTotalCalories%> | Total Protein: <%=sumTotalProtein%> g | Total Carbs: <%=sumTotalCarbs%> g | Total Fats: <%=sumTotalFats%> g</span>
 <br>
+  <ul>
+<% for(let i = 0; i < meals.length ; i++) { %>
 
-<% for(let i = 0; i < todaysMeals.length ; i++) { %>
-  <span> Date: <%= formatDate(todaysMeals[i].date) %> |</span>
-  <span> Food: <%= todaysMeals[i].foodName %> |</span>
-  <span> Calories: <%= todaysMeals[i].calories %> |</span>
-  <span> Protein: <%= todaysMeals[i].protein %> |</span>
-  <span> Carbs: <%= todaysMeals[i].carbs%> |</span>
-  <span> Fats: <%= todaysMeals[i].fats%> </span>
+  <li>
+    <p> Date: <span><%= formatDate(meals[i].date) %></span>|</p>
+    <p> Food: <span><%= meals[i].foodName %></span>|</p>
+    <p> Calories: <span><%= meals[i].calories %></span>|</p>
+    <p> Protein: <span><%= meals[i].protein %></span>|</p>
+    <p> Carbs: <span><%= meals[i].carbs%></span>|</p>
+    <p> Fats: <span><%= meals[i].fats%></span> </p>
+    <p><i class="fas fa-times" aria-hidden="true"></i></p>
+  </li>
+
   <br>
-<%
-  caloriesLeft = caloriesLeft - todaysMeals[i].calories
-%>
-<% } %>
 
-<form class="meals">
+<% } %>
+</ul>
+<form action="/createMeal" class="meals" method="POST">
 
   <h3>New Meal</h3>
-  <input type="hidden" class="date" name="" value="<%= dateToShow%>">
-  <input type="text" class="d-inline-block mb-3 foodName" placeholder="food name">
-  <input type="text" class="calories ml-4" placeholder="calories">
-  <input type="text" class="protein ml-4" placeholder="protein">
-  <input type="text" class="carbs ml-4" placeholder="carbs">
-  <input type="text" class="fats ml-4" placeholder="fats">
+  <input type="hidden" class="date" name="date" value="<%= dateToShow%>">
+  <input type="text" class="d-inline-block mb-3 foodName" placeholder="food name" name="foodName">
+  <input type="text" class="calories ml-4" placeholder="calories" name="calories">
+  <input type="text" class="protein ml-4" placeholder="protein" name="protein">
+  <input type="text" class="carbs ml-4" placeholder="carbs" name="carbs">
+  <input type="text" class="fats ml-4" placeholder="fats" name="fats">
   <button class="meal btn btn-primary d-block mt-4">Submit</button>
 
 </form>
@@ -86,7 +100,8 @@ console.log(dates)
 
 <a href="/users/logout"><button type="button" class="delete btn btn-primary d-block mt-4">Delete Profile</button></a>
 
-
+</body>
+</html>
 <script type="text/javascript" src="main.js"></script>
 <script type="text/javascript">
   const caloriesLeft = <%= caloriesLeft %>

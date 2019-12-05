@@ -3,6 +3,7 @@ const del = document.querySelector('.delete');
 const name = document.querySelector('.name').innerHTML;
 const meal = document.querySelector('.meal')
 const suggestion = document.querySelector('.suggestion')
+let remove = document.getElementsByClassName("fas fa-times")
 
 submit.addEventListener('click', () => {
   const currentWeight = document.querySelector('.currentWeight').value;
@@ -42,27 +43,27 @@ meal.addEventListener('click', () => {
   const fats = document.querySelector('.fats').value;
   const date = document.querySelector('.date').value;
 
-  fetch('mealsRoute', {
-    method: 'put',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify({
-      'date': date,
-      'foodName': foodName,
-      'calories': parseInt(calories),
-      'protein': parseInt(protein),
-      'carbs': parseInt(carbs),
-      'fats': parseInt(fats)
-    })
-  })
-  .then(res => {
-    if (res.ok) return res.json()
-  }).
-  then(data => {
-    console.log(data)
-  })
-})
+//   fetch('mealsRoute', {
+//     method: 'put',
+//     headers: {
+//       'Content-Type': 'application/json'
+//     },
+//     body: JSON.stringify({
+//       'date': date,
+//       'foodName': foodName,
+//       'calories': parseInt(calories),
+//       'protein': parseInt(protein),
+//       'carbs': parseInt(carbs),
+//       'fats': parseInt(fats)
+//     })
+//   })
+//   .then(res => {
+//     if (res.ok) return res.json()
+//   }).
+//   then(data => {
+//     console.log(data)
+//   })
+// })
 
 
 suggestion.addEventListener('click', () => {
@@ -85,6 +86,35 @@ suggestion.addEventListener('click', () => {
   })
 })
 
+
+Array.from(remove).forEach(function(element) {
+      element.addEventListener('click', function(){
+        alert("click's working")
+        const date = this.parentNode.parentNode.childNodes[1].childNodes[1].textContent
+        const food = this.parentNode.parentNode.childNodes[3].childNodes[1].textContent
+        const calories = this.parentNode.parentNode.childNodes[5].childNodes[1].textContent
+        const protein = this.parentNode.parentNode.childNodes[7].childNodes[1].textContent
+        const carbs = this.parentNode.parentNode.childNodes[9].childNodes[1].textContent
+        const fats = this.parentNode.parentNode.childNodes[11].childNodes[1].textContent
+        console.log(date,food,calories,protein,carbs,fats);
+        fetch('mealDelete', {
+          method: 'put',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            'date': date,
+            'food': food,
+            'calories': calories,
+            'protein': protein,
+            'carbs': carbs,
+            'fats': fats
+          })
+        }).then(function (response) {
+          window.location.reload()
+        })
+      });
+});
 
 
 del.addEventListener('click', () => {

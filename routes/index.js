@@ -12,6 +12,8 @@ function formatDate(date){
   const year = date.getFullYear();
   return (monthIndex+1) + '/' + day + '/' + year;
 }
+
+
 router.get('/dashboard', ensureAuthenticated, (req, res) => {
 let dateToShow = req.query.date
 if (!dateToShow){
@@ -45,24 +47,32 @@ let sumTotalCalories = 0
   sumTotalCalories += todaysMeals[i].calories
 }
 
-
 console.log(todaysMeals, dateToShow)
 
+  const db = mongoose.connection;
+db.collection('meals').find({userId: req.session.passport.user}).toArray( (err, result) => {
+      if (err) return console.log(err)
+      console.log('saved to database')
 
-  res.render('dashboard', {
-    user: req.user,
-    todaysMeals: todaysMeals,
-    sumTotalFats: sumTotalFats,
-    sumTotalCarbs: sumTotalCarbs,
-    sumTotalProtein: sumTotalProtein,
-    sumTotalCalories: sumTotalCalories,
-    formatDate: formatDate,
-    yesterdaysDate: yesterdaysDateFormatted,
-    tomorrowsDate: tomorrowsDateFormatted,
-    dateToShow: dateToShow
-  })
+      res.render('dashboard', {
+        user: req.user,
+        meals: result,
+        todaysMeals: todaysMeals,
+        sumTotalFats: sumTotalFats,
+        sumTotalCarbs: sumTotalCarbs,
+        sumTotalProtein: sumTotalProtein,
+        sumTotalCalories: sumTotalCalories,
+        formatDate: formatDate,
+        yesterdaysDate: yesterdaysDateFormatted,
+        tomorrowsDate: tomorrowsDateFormatted,
+        dateToShow: dateToShow
+      })
+    })
+
 
 });
+
+
 
 router.put('/goals', (req, res) => {
   console.log('hello');
@@ -85,36 +95,55 @@ router.put('/goals', (req, res) => {
   })
 })
 
-
-router.put('/mealsRoute', (req, res) => {
+router.post('/createMeal', (req, res) => {
   const db = mongoose.connection;
+  console.log(req.session.passport.user);
   const mealObject = {
     date: new Date(req.body.date),
     foodName: req.body.foodName,
     calories: req.body.calories,
     protein: req.body.protein,
     carbs: req.body.carbs,
-    fats: req.body.fats
+    fats: req.body.fats,
+    userId: req.session.passport.user
   }
 
-  db.collection('users').findOneAndUpdate({name: req.user.name}, {
-    $push: {
-      meals: mealObject,
-      totalCalories: req.body.calories,
-      totalProtein: req.body.protein,
-      totalCarbs: req.body.carbs,
-      totalFats: req.body.fats
-    }
+  db.collection('meals').save(mealObject, (err, result) => {
+        if (err) return console.log(err)
+        console.log('saved to database')
+        res.redirect('/dashboard')
+      })
+    })
 
-  }, {
-    sort: {_id: -1},
-  }, (err, result) => {
-    if (err) return res.send(err)
-    res.send(result)
-    console.log(result)
-  })
-
-})
+// router.put('/mealsRoute', (req, res) => {
+//   const db = mongoose.connection;
+//   const mealObject = {
+//     date: new Date(req.body.date),
+//     foodName: req.body.foodName,
+//     calories: req.body.calories,
+//     protein: req.body.protein,
+//     carbs: req.body.carbs,
+//     fats: req.body.fats
+//   }
+//
+//   db.collection('users').findOneAndUpdate({name: req.user.name}, {
+//     $push: {
+//       meals: mealObject,
+//       totalCalories: req.body.calories,
+//       totalProtein: req.body.protein,
+//       totalCarbs: req.body.carbs,
+//       totalFats: req.body.fats
+//     }
+//
+//   }, {
+//     sort: {_id: -1},
+//   }, (err, result) => {
+//     if (err) return res.send(err)
+//     res.send(result)
+//     console.log(result)
+//   })
+//
+// })
 
 router.post('/suggestions', ensureAuthenticated, (req, res) => {
   const db = mongoose.connection;
@@ -125,6 +154,22 @@ router.post('/suggestions', ensureAuthenticated, (req, res) => {
     res.send(result)
   })
 });
+
+// router.delete('/mealDelete', (req, res) => {
+//   const db = mongoose.connection;
+//   console.log("LOOOOK AT MEEEE" +req.body.date,req.body.food,req.body.calories,req.body.protein,req.body.carbs, req.body.fats);
+//       db.collection('users').findOneAndUpdate({ meals:{$elemMatch: {foodName:req.body.food}}
+//       },
+//       {
+//         $pull: { 'meals': { foodName: req.body.food } }
+//
+//       },
+//         (err, result) => {
+//         if (err) return res.send(500, err)
+//         res.send('Message deleted!')
+//       })
+//     })
+
 
 router.delete('/delete', (req, res) => {
   const db = mongoose.connection;
