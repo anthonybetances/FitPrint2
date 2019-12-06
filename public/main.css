@@ -1,0 +1,63 @@
+body{
+  width: 100%;
+  background-color: rgb(173, 189, 201);
+  color: black;
+
+
+}
+
+.mealPlan ul li p {
+  list-style-type: none;
+  display: inline;
+}
+
+.mealPlan{
+  display: inline-block;
+  margin-left: 14%
+
+}
+
+h1, h2{
+  display: contents;
+}
+
+#topBar, .topBar{
+  border: 1px solid black;
+  padding: 0;
+  margin: 0;
+  background-color: rgb(3, 186, 252)
+}
+
+.goalsSection{
+  float: left;
+}
+
+h3{
+  margin-top: 3em;
+}
+
+.suggest ol li{
+  list-style-type: none;
+  text-decoration: none
+}
+
+#button{
+  background-color: rgb(0, 92, 163);
+  color: white;
+  border: 1px solid white;
+  border-radius: 5px
+}
+.delete{
+  background-color: #4E5D6C;
+  border: none;
+}
+
+.fa-arrow-circle-left, .fa-arrow-circle-right{
+  font-size: 2em;
+  color: black;
+
+}
+
+a{
+  color: white
+}

@@ -4,30 +4,33 @@
     <meta charset="utf-8">
     <title>FitPrint</title>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+    <link rel="stylesheet" href="/main.css">
   </head>
 
-<body>
+<body id="body">
 
-
-<h1>FitPrint</h1>
-<h2 class="mt-4">Dashboard</h2>
-<p class="lead mb-3">Welcome <span class="name"><%= user.name %></span></p>
-<a href="/users/logout" class="btn btn-secondary">Log Out</a>
+<section id="topBar" class="topBar">
+  <h1>FitPrint</h1>
+  <p class="lead mb-3">Welcome, <span class="name"><%= user.name %>!</span></p>
+  <a href="/users/logout" class="btn btn-secondary">Log Out</a>
+</section>
 <br>
 
+<section>
+  <form class="goals">
+    <span class="d-inline-block mt-5 mb-3">Current Weight</span>
+    <input type="text" class="currentWeight"><br>
+    <span>Goal Weight </span>
+    <input type="text" class="goalWeight ml-4">
+    <button id="button"type="submit" class="submit btn btn-primary d-block mt-4">Submit</button>
+  </form>
+</section>
 
-<form class="goals">
-  <span class="d-inline-block mt-5 mb-3">Current Weight</span>
-  <input type="text" class="currentWeight"><br>
-  <span>Goal Weight </span>
-  <input type="text" class="goalWeight ml-4">
-  <button type="submit" class="submit btn btn-primary d-block mt-4">Submit</button>
-</form>
 
 <%
  let caloriesLeft = parseFloat(user.calorieGoal) - parseFloat(sumTotalCalories)
 %>
-
+<section class="goalsSection">
   <p class="mt-5"> Current Weight: <%= user.currentWeight %> lbs </p>
   <p> Goal Weight: <%= user.goalWeight %> lbs </p>
   <p> Daily Calorie Goal: <%= user.calorieGoal %> kcals </p>
@@ -35,14 +38,13 @@
   <p> Daily Carb Goal: <%= user.carbGoal %> g </p>
   <p> Daily Fat Goal: <%= user.fatGoal %> g </p>
   <input type="hidden" class="caloriesLeft" value="<%= caloriesLeft%>">
+</section>
 
+<section class="mealPlan">
+
+<a href="/dashboard?date=<%= yesterdaysDate%>"><i class="fas fa-arrow-circle-left"></i></a>
 <h2>Meals</h2>
-
-
-
-
-<a href="/dashboard?date=<%= yesterdaysDate%>">back</a>
-<a href="/dashboard?date=<%= tomorrowsDate%>">forward</a>
+<a href="/dashboard?date=<%= tomorrowsDate%>"><i class="fas fa-arrow-circle-right"></i></a>
 <br>
 <%
 const dates = []
@@ -54,8 +56,6 @@ const formattedDate = formatDate(user.meals[i].date)
 }
 console.log(dates)
 %>
-
-
 
 <span>Total Calories: <%=sumTotalCalories%> | Total Protein: <%=sumTotalProtein%> g | Total Carbs: <%=sumTotalCarbs%> g | Total Fats: <%=sumTotalFats%> g</span>
 <br>
@@ -78,33 +78,38 @@ console.log(dates)
 <% } %>
 </ul>
 
+</section>
+<section class="newMeal">
+
 <form action="/createMeal" class="meals" method="POST">
 
   <h3>New Meal</h3>
   <input type="hidden" class="date" name="date" value="<%= dateToShow%>">
   <input type="text" class="d-inline-block mb-3 foodName" placeholder="food name" name="foodName">
-  <input type="text" class="calories ml-4" placeholder="calories" name="calories">
-  <input type="text" class="protein ml-4" placeholder="protein" name="protein">
-  <input type="text" class="carbs ml-4" placeholder="carbs" name="carbs">
-  <input type="text" class="fats ml-4" placeholder="fats" name="fats">
-  <button type="submit" class="meal btn btn-primary d-block mt-4">Submit</button>
+  <input type="text" class="calories ml-1" placeholder="calories" name="calories">
+  <input type="text" class="protein ml-1" placeholder="protein" name="protein">
+  <input type="text" class="carbs ml-1" placeholder="carbs" name="carbs">
+  <input type="text" class="fats ml-1" placeholder="fats" name="fats">
+  <button id="button"type="submit" class="meal btn btn-primary d-block mt-4">Submit</button>
 
 </form>
 
-<section>
-  <h3>Suggestions</h3>
-  <p>How about: <span class="suggestions"> </span></p>
+</section>
+
+<section class="suggest">
+  <h3>Smart Suggestions</h3>
+  <p>How about <span class="suggestions"></span>?</p>
   <img src="" class="suggestionsImg">
   <ul class="ingredients"> </ul>
   <ol class="instructions"> </ol>
-  <button type="button" class="suggestion" name="button">Suggest a Meal</button>
+  <button id="button"type="button" class="suggestion" name="button">Suggest a Meal</button>
 </section>
 
 
 
 
 
-<a href="/users/logout"><button type="button" class="delete btn btn-primary d-block mt-4">Delete Profile</button></a>
+<a href="/users/logout"><button id="button "type="button" class="delete btn btn-primary d-block mt-4">Delete Profile</button></a>
 
 </body>
 </html>
