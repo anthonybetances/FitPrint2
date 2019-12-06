@@ -1,6 +1,8 @@
 const express = require('express');
 const router = express.Router();
 const mongoose = require('mongoose')
+var ObjectId = require('mongodb').ObjectID
+
 const { ensureAuthenticated, forwardAuthenticated } = require('../config/auth');
 // Welcome Page
 router.get('/', forwardAuthenticated, (req, res) => res.render('welcome'));
@@ -28,33 +30,34 @@ tomorrowsDate.setDate(tomorrowsDate.getDate()+1)
 let tomorrowsDateFormatted = formatDate(tomorrowsDate)
 
 
-let todaysMeals = []
-for (let i = 0; i < req.user.meals.length; i++){
-  if(dateToShow === formatDate(req.user.meals[i].date)){
-    todaysMeals.push(req.user.meals[i])
-  }
-}
 
-let sumTotalCarbs = 0
-let sumTotalFats = 0
-let sumTotalProtein = 0
-let sumTotalCalories = 0
 
-  for (let i = 0; i < todaysMeals.length ; i++){
-  sumTotalCarbs += todaysMeals[i].carbs
-  sumTotalFats += todaysMeals[i].fats
-  sumTotalProtein += todaysMeals[i].protein
-  sumTotalCalories += todaysMeals[i].calories
-}
-
-console.log(todaysMeals, dateToShow)
 
   const db = mongoose.connection;
 db.collection('meals').find({userId: req.session.passport.user}).toArray( (err, result) => {
       if (err) return console.log(err)
       console.log('saved to database')
 
-      res.render('dashboard', {
+      let todaysMeals = []
+      for (let i = 0; i < result.length; i++){
+        if(dateToShow === formatDate(result[i].date)){
+          todaysMeals.push(result[i])
+        }
+      }
+
+      let sumTotalCarbs = 0
+      let sumTotalFats = 0
+      let sumTotalProtein = 0
+      let sumTotalCalories = 0
+
+        for (let i = 0; i < todaysMeals.length ; i++){
+        sumTotalCarbs += parseFloat(todaysMeals[i].carbs)
+        sumTotalFats += parseFloat(todaysMeals[i].fats)
+        sumTotalProtein += parseFloat(todaysMeals[i].protein)
+        sumTotalCalories += parseFloat(todaysMeals[i].calories)
+      }
+
+      res.render('dashboard.ejs', {
         user: req.user,
         meals: result,
         todaysMeals: todaysMeals,
@@ -91,7 +94,7 @@ router.put('/goals', (req, res) => {
     sort: {_id: -1},
   }, (err, result) => {
     if (err) return res.send(err)
-    res.redirect('dashboard');
+    res.redirect('/dashboard');
   })
 })
 
@@ -111,7 +114,7 @@ router.post('/createMeal', (req, res) => {
   db.collection('meals').save(mealObject, (err, result) => {
         if (err) return console.log(err)
         console.log('saved to database')
-        res.redirect('/dashboard')
+        res.redirect(`/dashboard?date=${req.body.date}`)
       })
     })
 
@@ -147,29 +150,24 @@ router.post('/createMeal', (req, res) => {
 
 router.post('/suggestions', ensureAuthenticated, (req, res) => {
   const db = mongoose.connection;
-  db.collection('suggestions').findOne({ calories: { $lte: req.body.caloriesLeft } },
+  db.collection('suggestions').find().toArray(
   (err, result) => {
     if (err) return res.send(500, err)
-    if (result === null) return res.send({foodName: "You can't eat shit, bitch!"})
+    if (result === null) return res.send({foodName: "Sorry, food not found!"})
     res.send(result)
   })
 });
 
-// router.delete('/mealDelete', (req, res) => {
-//   const db = mongoose.connection;
-//   console.log("LOOOOK AT MEEEE" +req.body.date,req.body.food,req.body.calories,req.body.protein,req.body.carbs, req.body.fats);
-//       db.collection('users').findOneAndUpdate({ meals:{$elemMatch: {foodName:req.body.food}}
-//       },
-//       {
-//         $pull: { 'meals': { foodName: req.body.food } }
-//
-//       },
-//         (err, result) => {
-//         if (err) return res.send(500, err)
-//         res.send('Message deleted!')
-//       })
-//     })
-
+router.delete('/mealDelete', (req, res) => {
+  const db = mongoose.connection;
+  const caloriesObjectId = ObjectId(req.body.caloriesObjectId);
+  console.log(caloriesObjectId);
+  db.collection('meals').findOneAndDelete({_id: caloriesObjectId},
+  (err, result) => {
+    if (err) return res.send(500, err)
+    res.send({message: 'meal deleted'})
+  })
+})
 
 router.delete('/delete', (req, res) => {
   const db = mongoose.connection;

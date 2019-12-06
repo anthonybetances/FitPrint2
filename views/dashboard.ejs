@@ -25,7 +25,7 @@
 </form>
 
 <%
- let caloriesLeft = user.calorieGoal
+ let caloriesLeft = parseFloat(user.calorieGoal) - parseFloat(sumTotalCalories)
 %>
 
   <p class="mt-5"> Current Weight: <%= user.currentWeight %> lbs </p>
@@ -34,13 +34,13 @@
   <p> Daily Protein Goal: <%= user.proteinGoal %> g </p>
   <p> Daily Carb Goal: <%= user.carbGoal %> g </p>
   <p> Daily Fat Goal: <%= user.fatGoal %> g </p>
-
+  <input type="hidden" class="caloriesLeft" value="<%= caloriesLeft%>">
 
 <h2>Meals</h2>
 
 
 
-<%# arrows go here %>
+
 <a href="/dashboard?date=<%= yesterdaysDate%>">back</a>
 <a href="/dashboard?date=<%= tomorrowsDate%>">forward</a>
 <br>
@@ -56,11 +56,13 @@ console.log(dates)
 %>
 
 
+
 <span>Total Calories: <%=sumTotalCalories%> | Total Protein: <%=sumTotalProtein%> g | Total Carbs: <%=sumTotalCarbs%> g | Total Fats: <%=sumTotalFats%> g</span>
 <br>
   <ul>
 <% for(let i = 0; i < meals.length ; i++) { %>
 
+<% if (dateToShow && (dateToShow === formatDate(meals[i].date)) ) { %>
   <li>
     <p> Date: <span><%= formatDate(meals[i].date) %></span>|</p>
     <p> Food: <span><%= meals[i].foodName %></span>|</p>
@@ -68,13 +70,14 @@ console.log(dates)
     <p> Protein: <span><%= meals[i].protein %></span>|</p>
     <p> Carbs: <span><%= meals[i].carbs%></span>|</p>
     <p> Fats: <span><%= meals[i].fats%></span> </p>
-    <p><i class="fas fa-times" aria-hidden="true"></i></p>
+    <p><i class="fas fa-times" aria-hidden="true"></i><input type="hidden" value="<%=meals[i]._id%>"></p>
   </li>
 
   <br>
-
+<% } %>
 <% } %>
 </ul>
+
 <form action="/createMeal" class="meals" method="POST">
 
   <h3>New Meal</h3>
@@ -84,13 +87,16 @@ console.log(dates)
   <input type="text" class="protein ml-4" placeholder="protein" name="protein">
   <input type="text" class="carbs ml-4" placeholder="carbs" name="carbs">
   <input type="text" class="fats ml-4" placeholder="fats" name="fats">
-  <button class="meal btn btn-primary d-block mt-4">Submit</button>
+  <button type="submit" class="meal btn btn-primary d-block mt-4">Submit</button>
 
 </form>
 
 <section>
   <h3>Suggestions</h3>
   <p>How about: <span class="suggestions"> </span></p>
+  <img src="" class="suggestionsImg">
+  <ul class="ingredients"> </ul>
+  <ol class="instructions"> </ol>
   <button type="button" class="suggestion" name="button">Suggest a Meal</button>
 </section>
 
@@ -104,5 +110,4 @@ console.log(dates)
 </html>
 <script type="text/javascript" src="main.js"></script>
 <script type="text/javascript">
-  const caloriesLeft = <%= caloriesLeft %>
 </script>
