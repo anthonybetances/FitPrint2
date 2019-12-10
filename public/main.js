@@ -9,6 +9,7 @@ const suggestionsImg = document.querySelector('.suggestionsImg')
 let remove = document.getElementsByClassName("fas fa-times")
 const caloriesLeft = parseFloat(document.querySelector('.caloriesLeft').value)
 
+// current & goals
 submit.addEventListener('click', () => {
   const currentWeight = document.querySelector('.currentWeight').value;
   const goalWeight = document.querySelector('.goalWeight').value;
@@ -69,6 +70,7 @@ meal.addEventListener('click', () => {
 //   })
 })
 
+// recipe recommendations
 
 suggestion.addEventListener('click', () => {
   fetch('suggestions', {

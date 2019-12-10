@@ -1,20 +1,111 @@
-<!DOCTYPE html>
-<html lang="en" dir="ltr">
+<!doctype html>
+<html lang="en">
   <head>
-    <meta charset="utf-8">
-    <title>FitPrint</title>
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
-    <link rel="stylesheet" href="/main.css">
-  </head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="GYm,fitness,business,company,agency,multipurpose,modern,bootstrap4">
 
-<body id="body">
+  <meta name="author" content="Themefisher.com">
+
+  <title>FitPrint</title>
+
+  <!-- bootstrap.min css -->
+  <link rel="stylesheet" href="plugins/bootstrap/css/bootstrap.min.css">
+  <!-- Icofont Css -->
+  <link rel="stylesheet" href="plugins/icofont/icofont.min.css">
+  <!-- Themify Css -->
+  <link rel="stylesheet" href="plugins/themify/css/themify-icons.css">
+  <!-- animate.css -->
+  <link rel="stylesheet" href="plugins/animate-css/animate.css">
+  <!-- Magnify Popup -->
+  <link rel="stylesheet" href="plugins/magnific-popup/dist/magnific-popup.css">
+  <!-- Owl Carousel CSS -->
+  <link rel="stylesheet" href="plugins/slick-carousel/slick/slick.css">
+  <link rel="stylesheet" href="plugins/slick-carousel/slick/slick-theme.css">
+  <!-- Main Stylesheet -->
+  <link rel="stylesheet" href="css/style.css">
+
+</head>
+<body>
+
+<!-- Header Start -->
+
+
+<nav class="navbar navbar-expand-lg navigation fixed-top" id="navbar">
+	<div class="container-fluid">
+	  <a class="navbar-brand" href="/dashboard">
+	  		<h2 class="text-white text-capitalize"></i>Fit<span class="text-color">Print</span></h2>
+	  </a>
+
+	  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsid" aria-controls="navbarsid" aria-expanded="false" aria-label="Toggle navigation">
+		<span class="ti-view-list"></span>
+	  </button>
+
+	  <div class="collapse text-center navbar-collapse" id="navbarsid">
+		<ul class="navbar-nav mx-auto">
+		  <li class="nav-item active">
+			<a class="nav-link" href="/dashboard">Home <span class="sr-only">(current)</span></a>
+		  </li>
+		   <li class="nav-item dropdown">
+				<a class="nav-link dropdown-toggle" href="#" id="dropdown03" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Pages.</a>
+				<ul class="dropdown-menu  text-center" aria-labelledby="dropdown03">
+				  <li><a class="dropdown-item" href="about.html">About</a></li>
+				  <li><a class="dropdown-item" href="trainer.html">Trainer</a></li>
+				  <li><a class="dropdown-item" href="course.html">Courses</a></li>
+				</ul>
+		  </li>
+		   <li class="nav-item"><a class="nav-link" href="service.html">Services</a></li>
+		   <li class="nav-item"><a class="nav-link" href="pricing.html">Memebership</a></li>
+		   <li class="nav-item dropdown">
+				<a class="nav-link dropdown-toggle" href="#" id="dropdown05" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Blog.</a>
+				<ul class="dropdown-menu  text-center text-lg-left" aria-labelledby="dropdown05">
+				  <li><a class="dropdown-item" href="blog.html">Blog Grid</a></li>
+				  <li><a class="dropdown-item" href="blog-sidebar.html">Blog Sidebar</a></li>
+				  <li><a class="dropdown-item" href="blog-single.html">Blog Details</a></li>
+				</ul>
+		  </li>
+		   <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+       <a href="/users/logout" class="btn btn-main">Log Out</a>
+		</ul>
+	  </div>
+	</div>
+</nav>
+
+
+<!-- Header Close -->
+
+<div class="main-wrapper ">
+<section class="page-title bg-2">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12 text-center">
+          <ul class="list-inline mb-0">
+            <li class="list-inline-item"><a href="/dashboard" class="text-sm letter-spacing text-white text-uppercase font-weight-bold">Home</a></li>
+            <li class="list-inline-item"><span class="text-white">|</span></li>
+            <li class="list-inline-item"><a href="#" class="text-color text-uppercase text-sm letter-spacing">Course</a></li>
+          </ul>
+           <h1 class="text-lg text-white mt-2">Dashboard</h1>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+
+
+
+
+
 
 <section id="topBar" class="topBar">
-  <h1>FitPrint</h1>
   <p class="lead mb-3">Welcome, <span class="name"><%= user.name %>!</span></p>
-  <a href="/users/logout" class="btn btn-secondary">Log Out</a>
 </section>
 <br>
+
+
+<!-- Current & Goals inputs start -->
 
 <section>
   <form class="goals">
@@ -22,14 +113,17 @@
     <input type="text" class="currentWeight"><br>
     <span>Goal Weight </span>
     <input type="text" class="goalWeight ml-4">
-    <button id="button"type="submit" class="submit btn btn-primary d-block mt-4">Submit</button>
+    <button id="button"type="submit" class="submit btn btn-main d-block mt-4">Submit</button>
   </form>
 </section>
-
+<!-- Current & Goals inputs end -->
 
 <%
  let caloriesLeft = parseFloat(user.calorieGoal) - parseFloat(sumTotalCalories)
 %>
+
+<!-- Current & Goals output start -->
+
 <section class="goalsSection">
   <p class="mt-5"> Current Weight: <%= user.currentWeight %> lbs </p>
   <p> Goal Weight: <%= user.goalWeight %> lbs </p>
@@ -40,11 +134,16 @@
   <input type="hidden" class="caloriesLeft" value="<%= caloriesLeft%>">
 </section>
 
+<!-- Current & Goals output ends -->
+
 <section class="mealPlan">
 
+<!-- Access past meals below -->
 <a href="/dashboard?date=<%= yesterdaysDate%>"><i class="fas fa-arrow-circle-left"></i></a>
 <h2>Meals</h2>
 <a href="/dashboard?date=<%= tomorrowsDate%>"><i class="fas fa-arrow-circle-right"></i></a>
+<!-- Access future meals above -->
+
 <br>
 <%
 const dates = []
@@ -57,11 +156,14 @@ const formattedDate = formatDate(user.meals[i].date)
 console.log(dates)
 %>
 
+<!-- Daily totals below -->
 <span>Total Calories: <%=sumTotalCalories%> | Total Protein: <%=sumTotalProtein%> g | Total Carbs: <%=sumTotalCarbs%> g | Total Fats: <%=sumTotalFats%> g</span>
+<!-- Daily totals above -->
 <br>
   <ul>
+    <!-- Below loop iterates through user's meals for that day -->
 <% for(let i = 0; i < meals.length ; i++) { %>
-
+        <!-- Conditional inside loop.. if dateToShow exists (which it does) and is equal to the meal's formatted date, then... -->
 <% if (dateToShow && (dateToShow === formatDate(meals[i].date)) ) { %>
   <li>
     <p> Date: <span><%= formatDate(meals[i].date) %></span>|</p>
@@ -81,6 +183,7 @@ console.log(dates)
 </section>
 <section class="newMeal">
 
+<!-- Post form for new meals -->
 <form action="/createMeal" class="meals" method="POST">
 
   <h3>New Meal</h3>
@@ -90,29 +193,63 @@ console.log(dates)
   <input type="text" class="protein ml-1" placeholder="protein" name="protein">
   <input type="text" class="carbs ml-1" placeholder="carbs" name="carbs">
   <input type="text" class="fats ml-1" placeholder="fats" name="fats">
-  <button id="button"type="submit" class="meal btn btn-primary d-block mt-4">Submit</button>
+  <button id="button"type="submit" class="meal btn btn-main d-block mt-4">Submit</button>
 
 </form>
 
 </section>
-
+<!-- Recipe recommendations append below -->
 <section class="suggest">
   <h3>Smart Suggestions</h3>
   <p>How about <span class="suggestions"></span>?</p>
   <img src="" class="suggestionsImg">
   <ul class="ingredients"> </ul>
   <ol class="instructions"> </ol>
-  <button id="button"type="button" class="suggestion meal btn btn-primary d-block mt-4" name="button">Suggest a Meal</button>
+  <button id="button"type="button" class="suggestion meal btn btn-main d-block mt-4" name="button">Suggest a Meal</button>
 </section>
 
 
 
+<a href="/users/logout"><button id="button "type="button" class="delete d-block mt-4 btn btn-main">Delete Profile</button></a>
 
 
-<a href="/users/logout"><button id="button "type="button" class="delete d-block mt-4 btn btn-secondary">Delete Profile</button></a>
 
-</body>
-</html>
-<script type="text/javascript" src="main.js"></script>
+
+
+
+
+
+
+
+
+    </div>
+
+    <!--
+    Essential Scripts
+    =====================================-->
+
+
+    <!-- Main jQuery -->
+    <script src="plugins/jquery/jquery.js"></script>
+    <!-- Bootstrap 4.3.1 -->
+    <script src="plugins/bootstrap/js/bootstrap.min.js"></script>
+    <!-- Slick Slider -->
+    <script src="plugins/slick-carousel/slick/slick.min.js"></script>
+    <!--  Magnific Popup-->
+    <script src="plugins/magnific-popup/dist/jquery.magnific-popup.min.js"></script>
+    <!-- Form Validator -->
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery.form/3.32/jquery.form.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.11.1/jquery.validate.min.js"></script>
+    <!-- Google Map -->
+    <script src="plugins/google-map/map.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAkeLMlsiwzp6b3Gnaxd86lvakimwGA6UA&callback=initMap"></script>
+
+    <script src="js/script.js"></script>
+
+    <script type="text/javascript" src="main.js"></script>
 <script type="text/javascript">
 </script>
+
+
+  </body>
+  </html>

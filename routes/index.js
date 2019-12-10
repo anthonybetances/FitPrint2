@@ -17,6 +17,8 @@ function formatDate(date){
 
 
 router.get('/dashboard', ensureAuthenticated, (req, res) => {
+
+// date logic below - use to access meals past and present
 let dateToShow = req.query.date
 if (!dateToShow){
   dateToShow = formatDate(new Date())
@@ -28,9 +30,6 @@ let yesterdaysDateFormatted = formatDate(yesterdaysDate)
 let tomorrowsDate = new Date(dateToShow)
 tomorrowsDate.setDate(tomorrowsDate.getDate()+1)
 let tomorrowsDateFormatted = formatDate(tomorrowsDate)
-
-
-
 
 
   const db = mongoose.connection;
@@ -76,6 +75,7 @@ db.collection('meals').find({userId: req.session.passport.user}).toArray( (err, 
 });
 
 
+// sets/updates cal & macro goals in ejs & database based on main.js logic
 
 router.put('/goals', (req, res) => {
   console.log('hello');
@@ -97,6 +97,8 @@ router.put('/goals', (req, res) => {
     res.redirect('/dashboard');
   })
 })
+
+// saves new meals in database based on main.js logic
 
 router.post('/createMeal', (req, res) => {
   const db = mongoose.connection;
@@ -148,6 +150,8 @@ router.post('/createMeal', (req, res) => {
 //
 // })
 
+
+// recipe recommendations
 router.post('/suggestions', ensureAuthenticated, (req, res) => {
   const db = mongoose.connection;
   db.collection('suggestions').find().toArray(
@@ -158,6 +162,8 @@ router.post('/suggestions', ensureAuthenticated, (req, res) => {
   })
 });
 
+
+// meal deletion
 router.delete('/mealDelete', (req, res) => {
   const db = mongoose.connection;
   const caloriesObjectId = ObjectId(req.body.caloriesObjectId);
@@ -169,6 +175,7 @@ router.delete('/mealDelete', (req, res) => {
   })
 })
 
+// user deletion
 router.delete('/delete', (req, res) => {
   const db = mongoose.connection;
   db.collection('users').findOneAndDelete({name: req.body.user},

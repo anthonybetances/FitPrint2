@@ -1,23 +1,156 @@
-<link rel="stylesheet" href="/main.css">
-<div class="row mt-5">
-  <div class="col-md-6 m-auto">
-    <div class="card card-body">
-      <h1 class="text-center mb-3">FitPrint Log In</h1>
-      <% include ./partials/messages %>
-      <form action="/users/login" method="POST">
-        <div class="form-group">
-          <label for="email">Email</label>
-          <input type="email" id="email" name="email" class="form-control" placeholder="Enter Email" />
+<!doctype html>
+<html lang="en">
+  <head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="GYm,fitness,business,company,agency,multipurpose,modern,bootstrap4">
+
+  <meta name="author" content="Themefisher.com">
+
+  <title>FitPrint</title>
+
+  <!-- bootstrap.min css -->
+  <link rel="stylesheet" href="plugins/bootstrap/css/bootstrap.min.css">
+  <!-- Icofont Css -->
+  <link rel="stylesheet" href="plugins/icofont/icofont.min.css">
+  <!-- Themify Css -->
+  <link rel="stylesheet" href="plugins/themify/css/themify-icons.css">
+  <!-- animate.css -->
+  <link rel="stylesheet" href="plugins/animate-css/animate.css">
+  <!-- Magnify Popup -->
+  <link rel="stylesheet" href="plugins/magnific-popup/dist/magnific-popup.css">
+  <!-- Owl Carousel CSS -->
+  <link rel="stylesheet" href="plugins/slick-carousel/slick/slick.css">
+  <link rel="stylesheet" href="plugins/slick-carousel/slick/slick-theme.css">
+  <!-- Main Stylesheet -->
+  <link rel="stylesheet" href="../css/style.css">
+
+</head>
+<body>
+
+
+<!-- Section Menu Start -->
+<!-- Header Start -->
+
+
+<nav class="navbar navbar-expand-lg navigation fixed-top" id="navbar">
+	<div class="container-fluid">
+	  <a class="navbar-brand" href="/dashboard">
+	  		<h2 class="text-white text-capitalize"></i>Fit<span class="text-color">Print</span></h2>
+	  </a>
+	  </div>
+	</div>
+</nav>
+
+
+<!-- Header Close -->
+
+<div class="main-wrapper ">
+<!-- Section Menu End -->
+
+<!-- Section Slider Start -->
+<!-- Slider Start -->
+<section class="slider">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-8">
+
+
+
+
+
+
+        <div class="row mt-5">
+          <div class="col-md-6 m-auto">
+            <div class="card card-body">
+              <h1 class="text-center mb-3">Log In</h1>
+              <% include ./partials/messages %>
+              <form action="/users/login" method="POST">
+                <div class="form-group">
+                  <label for="email">Email</label>
+                  <input type="email" id="email" name="email" class="form-control" placeholder="Enter Email" />
+                </div>
+                <div class="form-group">
+                  <label for="password">Password</label>
+                  <input type="password" id="password" name="password" class="form-control" placeholder="Enter Password" />
+                </div>
+                <button id="button"type="submit" class="btn btn-main">Login</button>
+              </form>
+              <p class="lead mt-4">
+                No Account? <a href="/users/register">Register</a>
+              </p>
+            </div>
+          </div>
         </div>
-        <div class="form-group">
-          <label for="password">Password</label>
-          <input type="password" id="password" name="password" class="form-control" placeholder="Enter Password" />
-        </div>
-        <button id="button"type="submit" class="btn btn-primary btn-block">Login</button>
-      </form>
-      <p class="lead mt-4">
-        No Account? <a href="/users/register">Register</a>
-      </p>
-    </div>
-  </div>
-</div>
+
+
+
+
+
+
+
+
+
+
+
+      </div>
+		</div>
+	</div>
+</section>
+<!-- Section Slider End -->
+
+<!-- Section Intro Start -->
+<section class="mt-80px">
+	<div class="container">
+		<div class="row ">
+			<div class="col-lg-4 col-md-6">
+				<div class="card p-5 border-0 rounded-top border-bottom position-relative hover-style-1">
+					<span class="number">01</span>
+					<h3 class="mt-3">Fool-proof Formula</h3>
+					<p class="mt-3 mb-4">We calculate your nutritional targets based on your personalized fitness goals.</p>
+				</div>
+			</div>
+			<div class="col-lg-4 col-md-6">
+				<div class="card p-5 border-0 rounded-top hover-style-1">
+					<span class="number">02</span>
+					<h3 class="mt-3">Plan Your Meals</h3>
+					<p class="mt-3 mb-4">Our daily scheduler keeps you organized and on track to meet your macronutrient targets.</p>
+				</div>
+			</div>
+			<div class="col-lg-4 col-md-6">
+				<div class="card p-5 border-0 rounded-top hover-style-1">
+					<span class="number">03</span>
+					<h3 class="mt-3">Smart Suggestions</h3>
+					<p class="mt-3 mb-4">FitPrint recommends delicious recipes according to the day's deficits.</p>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+<!-- Section Intro End -->
+
+		</div>
+
+
+    <!--
+    Essential Scripts
+    =====================================-->
+
+
+    <!-- Main jQuery -->
+    <script src="plugins/jquery/jquery.js"></script>
+    <!-- Bootstrap 4.3.1 -->
+    <script src="plugins/bootstrap/js/bootstrap.min.js"></script>
+    <!-- Slick Slider -->
+    <script src="plugins/slick-carousel/slick/slick.min.js"></script>
+    <!--  Magnific Popup-->
+    <script src="plugins/magnific-popup/dist/jquery.magnific-popup.min.js"></script>
+    <!-- Form Validator -->
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery.form/3.32/jquery.form.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.11.1/jquery.validate.min.js"></script>
+
+    <script src="js/script.js"></script>
+
+  </body>
+  </html>
