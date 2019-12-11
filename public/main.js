@@ -7,7 +7,7 @@ const ingredients = document.querySelector('.ingredients')
 const instructions = document.querySelector('.instructions')
 const suggestionsImg = document.querySelector('.suggestionsImg')
 let remove = document.getElementsByClassName("fas fa-times")
-let caloriesLeft = parseFloat(document.querySelector('#caloriesLeft').value)
+let caloriesLeft = parseFloat(document.querySelector('#caloriesLeft').innerText)
 
 // current & goals
 submit.addEventListener('click', () => {
@@ -74,7 +74,7 @@ meal.addEventListener('click', () => {
 // recipe recommendations
 
 suggestion.addEventListener('click', () => {
-  alert("THis BUTTON WORKS")
+  
   fetch('suggestions', {
     method: 'post',
     headers: {
@@ -89,23 +89,36 @@ suggestion.addEventListener('click', () => {
   }).
   then(data => {
     console.log(data);
+    caloriesLeft = parseFloat(document.querySelector('#caloriesLeft').innerText)
     let caloriesRoundedDown = (Math.floor(caloriesLeft/100))*100
+    console.log(caloriesRoundedDown)
     let foodChoice
     // for (let h=0;h<data.length;h++){
     //   if (data[h].calories === caloriesRoundedDown ){
     //     foodChoice = data[h]
     //   }
     // }
-    if (caloriesRoundedDown <= 100){
-      foodChoice = data[1]
-    }else if(caloriesRoundedDown <= 200){
-      foodChoice = data[0]
-    }else if(caloriesRoundedDown <= 300){
-      foodChoice = data[2]
-    }else if(caloriesRoundedDown <= 400){
-      foodChoice = data[3]
-    }
+    // if (caloriesRoundedDown <= 100){
+    //   foodChoice = data[1]
+    // }else if(caloriesRoundedDown <= 200){
+    //   foodChoice = data[0]
+    // }else if(caloriesRoundedDown <= 300){
+    //   foodChoice = data[2]
+    // }else if(caloriesRoundedDown <= 400){
+    //   foodChoice = data[3]
+    // }
 
+    if (caloriesRoundedDown <= 100){
+     foodChoice = data[1]
+   }else if(caloriesRoundedDown <= 200){
+     foodChoice = data[3]
+   }else if(caloriesRoundedDown <= 300){
+     foodChoice = data[2]
+   }else if(caloriesRoundedDown <= 400){
+     foodChoice = data[0]
+   } else {
+     foodChoice = data[1];
+   }
 
 
 

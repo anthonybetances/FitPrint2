@@ -162,6 +162,18 @@ router.post('/suggestions', ensureAuthenticated, (req, res) => {
   })
 });
 
+// recipe recommendations
+// router.post('/suggestions', ensureAuthenticated, (req, res) => {
+//   const db = mongoose.connection;
+//   console.log("This is suggestions", res)
+//   db.collection('suggestions').find().sort({calories: 1}).toArray(
+//   (err, result) => {
+//     if (err) return res.send(500, err)
+//     if (result === null) return res.send({foodName: "Sorry, food not found!"})
+//     res.send(result)
+//   })
+// });
+
 
 // meal deletion
 router.delete('/mealDelete', (req, res) => {

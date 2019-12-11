@@ -4,17 +4,13 @@
   display: inline;
 }
 
-.mealPlan{
-  border: 1px solid yellow
 
-}
 
 h1, h2{
   display: contents;
 }
 
 #topBar, .topBar{
-  /* border: 1px solid black; */
   padding: 0;
   margin: 0;
   /* background-color: rgb(3, 186, 252) */
@@ -46,16 +42,6 @@ h3{
 }
 
 
-.goalsSection{
-  border: 1px solid orange;
-  /* display: inline;
-  width: 20%; */
-
-}
-
-.newMeal{
-  border: 1px solid lightgreen
-}
 
 .fa-times{
   color: #F5634B;
@@ -64,3 +50,16 @@ h3{
 /* div {
   display: inline;
 } */
+
+.course-widget{
+  float: left;
+  margin-right:4%
+}
+
+.btn-logout{
+  margin-left: 700px;
+}
+
+.nav-item-dash{
+  margin-left: 100px;
+}
