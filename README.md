@@ -5,8 +5,6 @@ This app is a work in progress.  So far, users are allowed to register, and add 
 ## Background
 This year, I’ve been using the myfitnesspal app to track my calories and macros in an effort to lose weight and maintain my fitness, and it worked.  My biggest gripe with the app is that it’s entirely on you to create your meals from the different foods.  The app has a section where it posts Huffington Post-like articles suggesting recipes and things to try, but it doesn’t make suggestions based on your likes/dislikes, and there’s no way to select a pre-made recipe and easily add it as a meal or to a meal unless you've already done the work to set it up yourself.  This project is the beginning of what will become a full-stack tracker with a recipe bank that suggests recipes according to the macros and calories that you still have left in the day, and allows you to add them to your meal plan, store for later, and use again.
 
-![alt tag](https://github.com/anthonybetances/FitPrint2/blob/master/Screen%20Shot%202019-11-24%20at%207.49.36%20PM.png)
-![alt tag](https://github.com/anthonybetances/FitPrint2/blob/master/Screen%20Shot%202019-11-24%20at%207.49.56%20PM.png)
 
 ## How It's Made:
 **Tech used:** HTML, CSS, JavaScript, EJS, Node.js, MongoDb, Express Framework.
