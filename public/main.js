@@ -7,7 +7,7 @@ const ingredients = document.querySelector('.ingredients')
 const instructions = document.querySelector('.instructions')
 const suggestionsImg = document.querySelector('.suggestionsImg')
 let remove = document.getElementsByClassName("fas fa-times")
-const caloriesLeft = parseFloat(document.querySelector('.caloriesLeft').value)
+let caloriesLeft = parseFloat(document.querySelector('#caloriesLeft').value)
 
 // current & goals
 submit.addEventListener('click', () => {
@@ -74,6 +74,7 @@ meal.addEventListener('click', () => {
 // recipe recommendations
 
 suggestion.addEventListener('click', () => {
+  alert("THis BUTTON WORKS")
   fetch('suggestions', {
     method: 'post',
     headers: {
@@ -99,7 +100,14 @@ suggestion.addEventListener('click', () => {
       foodChoice = data[1]
     }else if(caloriesRoundedDown <= 200){
       foodChoice = data[0]
+    }else if(caloriesRoundedDown <= 300){
+      foodChoice = data[2]
+    }else if(caloriesRoundedDown <= 400){
+      foodChoice = data[3]
     }
+
+
+
 
     document.querySelector('.suggestions').innerHTML = foodChoice.foodName
     suggestionsImg.src = foodChoice.imageUrl

@@ -5,8 +5,7 @@
 }
 
 .mealPlan{
-  display: inline-block;
-  margin-left: 14%
+  border: 1px solid yellow
 
 }
 
@@ -21,12 +20,9 @@ h1, h2{
   /* background-color: rgb(3, 186, 252) */
 }
 
-.goalsSection{
-  float: left;
-}
 
 h3{
-  margin-top: 3em;
+  margin-top: 1em;
 }
 
 .suggest ol li{
@@ -44,7 +40,27 @@ h3{
   border: none;
 }
 
-.fa-arrow-circle-left, .fa-arrow-circle-right{
-  font-size: 2em;
+.fa-angle-double-left, .fa-angle-double-right{
+  font-size: 2.5em;
 
 }
+
+
+.goalsSection{
+  border: 1px solid orange;
+  /* display: inline;
+  width: 20%; */
+
+}
+
+.newMeal{
+  border: 1px solid lightgreen
+}
+
+.fa-times{
+  color: #F5634B;
+  size: 3.5em;
+}
+/* div {
+  display: inline;
+} */

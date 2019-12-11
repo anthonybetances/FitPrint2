@@ -46,7 +46,7 @@
 	  <div class="collapse text-center navbar-collapse" id="navbarsid">
 		<ul class="navbar-nav mx-auto">
 		  <li class="nav-item active">
-			<a class="nav-link" href="/dashboard">Home <span class="sr-only">(current)</span></a>
+			<a class="nav-link" href="/dashboard">Dashboard <span class="sr-only">(current)</span></a>
 		  </li>
 		   <li class="nav-item dropdown">
 				<a class="nav-link dropdown-toggle" href="#" id="dropdown03" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Pages.</a>
@@ -82,11 +82,11 @@
     <div class="row">
       <div class="col-lg-12 text-center">
           <ul class="list-inline mb-0">
-            <li class="list-inline-item"><a href="/dashboard" class="text-sm letter-spacing text-white text-uppercase font-weight-bold">Home</a></li>
+            <li class="list-inline-item"><a href="/dashboard" class="text-sm letter-spacing text-white text-uppercase font-weight-bold">FitPrint</a></li>
             <li class="list-inline-item"><span class="text-white">|</span></li>
-            <li class="list-inline-item"><a href="#" class="text-color text-uppercase text-sm letter-spacing">Course</a></li>
+            <li class="list-inline-item"><a href="#" class="text-color text-uppercase text-sm letter-spacing">Dashboard</a></li>
           </ul>
-           <h1 class="text-lg text-white mt-2">Dashboard</h1>
+           <h1 class="text-lg text-white mt-2">Welcome, <span class="name"><%= user.name %></span>.</h1>
       </div>
     </div>
   </div>
@@ -95,29 +95,11 @@
 
 
 
-
-
-
-
-
-<section id="topBar" class="topBar">
+<!-- <section id="topBar" class="topBar">
   <p class="lead mb-3">Welcome, <span class="name"><%= user.name %>!</span></p>
 </section>
-<br>
+<br> -->
 
-
-<!-- Current & Goals inputs start -->
-
-<section>
-  <form class="goals">
-    <span class="d-inline-block mt-5 mb-3">Current Weight</span>
-    <input type="text" class="currentWeight"><br>
-    <span>Goal Weight </span>
-    <input type="text" class="goalWeight ml-4">
-    <button id="button"type="submit" class="submit btn btn-main d-block mt-4">Submit</button>
-  </form>
-</section>
-<!-- Current & Goals inputs end -->
 
 <%
  let caloriesLeft = parseFloat(user.calorieGoal) - parseFloat(sumTotalCalories)
@@ -125,24 +107,56 @@
 
 <!-- Current & Goals output start -->
 
+
 <section class="goalsSection">
-  <p class="mt-5"> Current Weight: <%= user.currentWeight %> lbs </p>
-  <p> Goal Weight: <%= user.goalWeight %> lbs </p>
-  <p> Daily Calorie Goal: <%= user.calorieGoal %> kcals </p>
-  <p> Daily Protein Goal: <%= user.proteinGoal %> g </p>
-  <p> Daily Carb Goal: <%= user.carbGoal %> g </p>
-  <p> Daily Fat Goal: <%= user.fatGoal %> g </p>
-  <input type="hidden" class="caloriesLeft" value="<%= caloriesLeft%>">
+  <div class="col-lg-3">
+    <div class= "course-widget border py-4 px-2 mt-lg-0">
+
+            <h3 class="text-center mb-3">Let's Check In</h3>
+      <form class="goals">
+        <span class="d-inline-block mt-5 mb-3">Current Weight</span>
+        <input type="text" class="currentWeight"> lbs<br>
+        <span>Goal Weight </span>
+        <input type="text" class="goalWeight ml-4"> lbs
+        <button id="button"type="submit" class="submit btn btn-main d-block mt-4">Submit</button>
+      </form>
+
+      <h3 class="text-center mb-3">Daily Targets</h3>
+      <ul class="list-group  list-group-flush">
+
+        <li class="list-group-item d-flex justify-content-between align-items-center text-black">
+          Current Weight<span class="text-black-50"><%= user.currentWeight %> lbs</span>
+        </li>
+         <li class="list-group-item d-flex justify-content-between align-items-center text-black">
+          Goal Weight<span class="text-black-50"><%= user.goalWeight %> lbs</span>
+        </li>
+        <li class="list-group-item d-flex justify-content-between align-items-center text-black">
+          Daily Calorie Goal<span class="text-black-50"><%= user.calorieGoal %> kcals</span>
+        </li>
+        <li class="list-group-item d-flex justify-content-between align-items-center text-black">
+          Daily Protein Goal<span class="text-black-50"><%= user.proteinGoal %> g</span>
+        </li>
+        <li class="list-group-item d-flex justify-content-between align-items-center text-black">
+          Daily Carb Goal<span class="text-black-50"><%= user.carbGoal %> g </span>
+        </li>
+        <li class="list-group-item d-flex justify-content-between align-items-center text-black">
+          Daily Fat Goal<span class="text-black-50"><%= user.fatGoal %> g</span>
+        </li>
+      </ul>
+    </div>
+  </div>
+
 </section>
 
 <!-- Current & Goals output ends -->
 
 <section class="mealPlan">
-
+<h2>Meals</h2> <br>
 <!-- Access past meals below -->
-<a href="/dashboard?date=<%= yesterdaysDate%>"><i class="fas fa-arrow-circle-left"></i></a>
-<h2>Meals</h2>
-<a href="/dashboard?date=<%= tomorrowsDate%>"><i class="fas fa-arrow-circle-right"></i></a>
+<a href="/dashboard?date=<%= yesterdaysDate%>"><i class="fas fa-angle-double-left"></i></a>
+<span class="text-lg text-color"><%=dateToShow%></span>
+<a href="/dashboard?date=<%= tomorrowsDate%>"><i class="fas fa-angle-double-right"></i></a>
+
 <!-- Access future meals above -->
 
 <br>
@@ -154,25 +168,37 @@ const formattedDate = formatDate(user.meals[i].date)
     dates.push(formattedDate)
   }
 }
-console.log(dates)
 %>
 
 <!-- Daily totals below -->
-<span>Total Calories: <%=sumTotalCalories%> | Total Protein: <%=sumTotalProtein%> g | Total Carbs: <%=sumTotalCarbs%> g | Total Fats: <%=sumTotalFats%> g</span>
+
+
+<ul class="list-group list-group-horizontal-sm mt-5 mb-4">
+  <li class="list-group-item "><span class="text-lg text-color"><%=sumTotalCalories%></span> Total Calories</li>
+  <li class="list-group-item "><span id="caloriesLeft" class="text-lg text-color"><%=caloriesLeft%></span> Calories Left</li>
+  <li class="list-group-item"><span class="text-lg text-color"><%=sumTotalProtein%> g</span> Total Protein</li>
+  <li class="list-group-item"><span class="text-lg text-color"><%=sumTotalCarbs%> g</span> Total Carbs</li>
+  <li class="list-group-item"><span class="text-lg text-color"><%=sumTotalFats%> g</span> Total Fats</li>
+</ul>
+
+
+
+<!-- <span class="list-group-item d-flex justify-content-between align-items-center text-black">
+  Total Calories: <%=sumTotalCalories%> | Total Protein: <%=sumTotalProtein%> g | Total Carbs: <%=sumTotalCarbs%> g | Total Fats: <%=sumTotalFats%> g</span> -->
 <!-- Daily totals above -->
 <br>
-  <ul>
+  <ul class="list-group  list-group-flush">
     <!-- Below loop iterates through user's meals for that day -->
 <% for(let i = 0; i < meals.length ; i++) { %>
         <!-- Conditional inside loop.. if dateToShow exists (which it does) and is equal to the meal's formatted date, then... -->
 <% if (dateToShow && (dateToShow === formatDate(meals[i].date)) ) { %>
-  <li>
-    <p> Date: <span><%= formatDate(meals[i].date) %></span>|</p>
-    <p> Food: <span><%= meals[i].foodName %></span>|</p>
-    <p> Calories: <span><%= meals[i].calories %></span>|</p>
-    <p> Protein: <span><%= meals[i].protein %></span>|</p>
-    <p> Carbs: <span><%= meals[i].carbs%></span>|</p>
-    <p> Fats: <span><%= meals[i].fats%></span> </p>
+  <li class="list-group-item d-flex justify-content-between align-items-center text-black">
+    <p> Date: <span><%= formatDate(meals[i].date) %></span></p>
+    <p> Food: <span><%= meals[i].foodName %></span></p>
+    <p> Calories: <span><%= meals[i].calories %></span> kcals</p>
+    <p> Protein: <span><%= meals[i].protein %></span> g</p>
+    <p> Carbs: <span><%= meals[i].carbs%></span> g</p>
+    <p> Fats: <span><%= meals[i].fats%></span> g</p>
     <p><i class="fas fa-times" aria-hidden="true"></i><input type="hidden" value="<%=meals[i]._id%>"></p>
   </li>
 
@@ -181,8 +207,6 @@ console.log(dates)
 <% } %>
 </ul>
 
-</section>
-<section class="newMeal">
 
 <!-- Post form for new meals -->
 <form action="/createMeal" class="meals" method="POST">
@@ -202,7 +226,7 @@ console.log(dates)
 <!-- Recipe recommendations append below -->
 <section class="suggest">
   <h3>Smart Suggestions</h3>
-  <p>How about <span class="suggestions"></span>?</p>
+  <p><span class="suggestions"></span></p>
   <img src="" class="suggestionsImg">
   <ul class="ingredients"> </ul>
   <ol class="instructions"> </ol>
@@ -241,11 +265,9 @@ console.log(dates)
     <!-- Form Validator -->
     <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery.form/3.32/jquery.form.js"></script>
     <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.11.1/jquery.validate.min.js"></script>
-    <!-- Google Map -->
-    <script src="plugins/google-map/map.js"></script>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAkeLMlsiwzp6b3Gnaxd86lvakimwGA6UA&callback=initMap"></script>
 
-    <script src="js/script.js"></script>
+
+    <!-- <script src="js/script.js"></script> -->
 
     <script type="text/javascript" src="main.js"></script>
 <script type="text/javascript">

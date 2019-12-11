@@ -75,28 +75,6 @@ db.collection('meals').find({userId: req.session.passport.user}).toArray( (err, 
 
 // sets/updates cal & macro goals in ejs & database based on main.js logic
 
-// router.post('/goals', (req, res) => {
-//   console.log('hello');
-//   console.log(req.user);
-//   const db = mongoose.connection;
-//   const userGoals = {
-//     currentWeight: req.body.currentWeight,
-//     goalWeight: req.body.goalWeight,
-//     calorieGoal: req.body.calorieGoal,
-//     proteinGoal: req.body.proteinGoal,
-//     carbGoal: req.body.carbGoal,
-//     fatGoal: req.body.fatGoal
-//   }
-//
-//   db.collection('users').save(userGoals, (err, result) => {
-//         if (err) return console.log(err)
-//         console.log('saved to database')
-//         res.redirect('/dashboard')
-//       })
-//     })
-
-
-
 
 router.put('/goals', (req, res) => {
   console.log('hello');
@@ -175,6 +153,7 @@ router.post('/createMeal', (req, res) => {
 // recipe recommendations
 router.post('/suggestions', ensureAuthenticated, (req, res) => {
   const db = mongoose.connection;
+  console.log("This is suggestions", res)
   db.collection('suggestions').find().toArray(
   (err, result) => {
     if (err) return res.send(500, err)
