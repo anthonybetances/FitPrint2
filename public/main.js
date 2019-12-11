@@ -37,6 +37,7 @@ submit.addEventListener('click', () => {
   }).
   then(data => {
     console.log(data)
+    window.location.reload(true)
   })
 })
 
@@ -89,10 +90,15 @@ suggestion.addEventListener('click', () => {
     console.log(data);
     let caloriesRoundedDown = (Math.floor(caloriesLeft/100))*100
     let foodChoice
-    for (let h=0;h<data.length;h++){
-      if (data[h].calories === caloriesRoundedDown ){
-        foodChoice = data[h]
-      }
+    // for (let h=0;h<data.length;h++){
+    //   if (data[h].calories === caloriesRoundedDown ){
+    //     foodChoice = data[h]
+    //   }
+    // }
+    if (caloriesRoundedDown <= 100){
+      foodChoice = data[1]
+    }else if(caloriesRoundedDown <= 200){
+      foodChoice = data[0]
     }
 
     document.querySelector('.suggestions').innerHTML = foodChoice.foodName

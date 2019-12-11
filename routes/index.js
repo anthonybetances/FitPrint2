@@ -70,12 +70,33 @@ db.collection('meals').find({userId: req.session.passport.user}).toArray( (err, 
         dateToShow: dateToShow
       })
     })
-
-
 });
 
 
 // sets/updates cal & macro goals in ejs & database based on main.js logic
+
+// router.post('/goals', (req, res) => {
+//   console.log('hello');
+//   console.log(req.user);
+//   const db = mongoose.connection;
+//   const userGoals = {
+//     currentWeight: req.body.currentWeight,
+//     goalWeight: req.body.goalWeight,
+//     calorieGoal: req.body.calorieGoal,
+//     proteinGoal: req.body.proteinGoal,
+//     carbGoal: req.body.carbGoal,
+//     fatGoal: req.body.fatGoal
+//   }
+//
+//   db.collection('users').save(userGoals, (err, result) => {
+//         if (err) return console.log(err)
+//         console.log('saved to database')
+//         res.redirect('/dashboard')
+//       })
+//     })
+
+
+
 
 router.put('/goals', (req, res) => {
   console.log('hello');
@@ -94,8 +115,8 @@ router.put('/goals', (req, res) => {
     sort: {_id: -1},
   }, (err, result) => {
     if (err) return res.send(err)
-    res.redirect('/dashboard');
   })
+  res.send(result);
 })
 
 // saves new meals in database based on main.js logic
