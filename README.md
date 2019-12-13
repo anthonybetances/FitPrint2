@@ -2,7 +2,7 @@
 
 This app is a work in progress.  So far, FitPrint calculates your daily targets based on your current and goal weights, allows you to plan meals in advance, and recommends recipes based on your daily caloric deficits.
 
-**Please note that, as this version does NOT use an API and recipes are manually set in separate database collection, FitPrint is currently set to suggests the same meals for caloric deficits of 500+.**
+**Please note that, as this version does NOT use an API and recipes are manually set in separate database collection, FitPrint is currently set to suggest the same meal for caloric deficits of 500+.**
 
 Future versions will factor in macronutrient deficiencies in addition to caloric deficits when retrieving meal suggestions from the database.
 
